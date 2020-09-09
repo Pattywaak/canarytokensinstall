@@ -23,7 +23,9 @@ curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compo
 chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
-cd /canarytokens
+git clone https://github.com/thinkst/canarytokens-docker
+
+cd canarytokens-docker
 cp frontend.env.dist frontend.env
 cp switchboard.env.dist switchboard.env
 
