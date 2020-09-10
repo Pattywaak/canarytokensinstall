@@ -30,6 +30,39 @@ cd /canarytokens
 cp frontend.env.dist frontend.env
 cp switchboard.env.dist switchboard.env
 
-echo What is your domain name? eg google.com
-read domainname
-echo $domainname
+echo "What is your domain name?"
+read domain_name
+sed -i -e s/localhost/"$domain_name"/g frontend.env
+
+echo "Added domain:" $domain_name
+
+echo "Enter your subdomain, eg pdf.example.com"
+read sub_domain_name
+sed -i -e s/yourdomain.com/"$sub_domain_name"/g frontend.env
+
+echo "Added subdomain:" $sub_domain_name
+
+echo "What is your mailgun domain name?"
+read mailgun_domain_name
+sed -i -e s/#CANARY_MAILGUN_DOMAIN_NAME=/CANARY_MAILGUN_DOMAIN_NAME="$mailgun_domain_name"/g switchboard.env
+
+echo "Added mailgun domain name:" $mailgun_domain_name
+
+echo "What is the API key for mailgun"
+read mailgun_api_key
+sed -i -e s/#CANARY_MAILGUN_API_KEY=/CANARY_MAILGUN_API_KEY="$mailgun_api_key"/g switchboard.env
+
+echo "Mailgun key:" $mailgun_api_key "was added"
+
+echo "What is the public IP of this canarytoken server"
+read public_ip
+sed -i -e s/CANARY_PUBLIC_IP=/CANARY_PUBLIC_IP="$public_ip"/g switchboard.env
+
+echo "The IP address" $public_ip "was added"
+
+echo "What is the mailgun email address"
+read mailgun_email
+sed -i -e s/CANARY_ALERT_EMAIL_FROM_ADDRESS=/CANARY_ALERT_EMAIL_FROM_ADDRESS="$mailgun_email"/g switchboard.env
+
+echo "The mailgun email" $mailgun_email "was added"
+
