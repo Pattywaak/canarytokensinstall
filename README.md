@@ -16,4 +16,4 @@ Wait for the install to complete and follow the questions when ready
 
 ## Step 5:
 
-If you make an error with the configuration of canarytokens, repeat steps 2 and 3 with canary_reconfig instead of canaryinstaller.
+If you make an error with the configuration of canarytokens, repeat steps 2 and 3 with canary_reconfig instead of canaryinstaller
