@@ -21,3 +21,7 @@ Wait for the install to complete and follow the questions when ready
 ## STEP 6:
 
 If you make an error with the configuration of canarytokens, repeat steps 2 and 3 with canary_reconfig instead of canaryinstaller
+
+## STEP 7:
+
+Navigate to canary-docker file and run the command sudo docker-compose up
