@@ -1,27 +1,33 @@
 ## STEP 1:
 
-Download the github package using git clone https://github.com/Pattywaak/canarytokensinstall.git
+Download the github package
+
+git clone https://github.com/Pattywaak/canarytokensinstall.git
 
 ## STEP 2:
 
-Change to the canarytokensinstall directory (cd canarytokensinstall)
+Change to the canarytokensinstall directory
+
+cd canarytokensinstall
 
 ## STEP 3:
 
-Change the permissions of the canaryinstaller to have execute permissions (sudo chmod +x canaryinstaller)
+Change the permissions of the canaryinstaller
+
+sudo chmod +x canaryinstaller
 
 ## STEP 4:
 
-Execute the bash file as sudo (sudo ./canaryinstaller)
+Execute the bash file as sudo
+
+sudo ./canaryinstaller
 
 ## STEP 5:
 
-Wait for the install to complete and follow the questions when ready
+The packages should be installing, wait for these to be finished and provide variables to the questions. If you make an error with the configuration of canarytokens, repeat steps 3 and 4 with canary_reconfig. 
 
 ## STEP 6:
 
-If you make an error with the configuration of canarytokens, repeat steps 2 and 3 with canary_reconfig instead of canaryinstaller
+Start up the CanaryTokens server 
 
-## STEP 7:
-
-Navigate to canary-docker file and run the command sudo docker-compose up
+sudo docker-compose up
