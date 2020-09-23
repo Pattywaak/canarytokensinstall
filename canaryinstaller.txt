@@ -1,5 +1,8 @@
 !/bin/sh
 
+systemctl disable systemd-resolved
+systemctl stop systemd-resolved
+
 apt-get update 
 
 apt-get install -y \
