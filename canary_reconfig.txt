@@ -1,10 +1,10 @@
 !/bin/sh
 
-echo "Restarting the CanaryTokens configuration stage\n\n"
+echo "Restarting the CanaryTokens configuration stage...\n\n"
 
 cd canarytokens
 
-echo "What is your domain name?"
+echo "Enter your domain name, eg example.com"
 read domain_name
 sed -i -e s/CANARY_DOMAINS=.*/CANARY_DOMAINS="$domain_name"/g frontend.env
 
@@ -16,7 +16,7 @@ sed -i -e s/CANARY_NXDOMAINS=.*/CANARY_NXDOMAINS="$sub_domain_name"/g frontend.e
 
 echo "Subdomain:" $sub_domain_name "was added to the frontend.env config\n\n"
 
-echo "What is your mailgun domain name?"
+echo "Enter your mailgun domain name"
 read mailgun_domain_name
 sed -i -e s/#CANARY_MAILGUN_DOMAIN_NAME=/CANARY_MAILGUN_DOMAIN_NAME="$mailgun_domain_name"/g switchboard.env
 
