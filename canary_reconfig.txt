@@ -1,35 +1,36 @@
 !/bin/sh
 
-echo "Restarting the CanaryTokens configuration stage...\n\n"
+echo "Configuration Setup Initialising...\n"
 
 cd canarytokens
 
-echo "Enter your domain name, eg example.com"
-read domain_name
-sed -i -e s/CANARY_DOMAINS=.*/CANARY_DOMAINS="$domain_name"/g frontend.env
+#Promting the user to input a set of variables to be replaced in the frontend.env and switchboard.env config files in the canarytokens directory
 
+echo "Please enter the registered domain name of the organisation, e.g. "example.com"\n"
+read domain_name
 echo "Domain:" $domain_name "was added to the frontend.env config\n\n"
 
 echo "Enter your subdomain, eg pdf.example.com"
 read sub_domain_name
-sed -i -e s/CANARY_NXDOMAINS=.*/CANARY_NXDOMAINS="$sub_domain_name"/g frontend.env
-
 echo "Subdomain:" $sub_domain_name "was added to the frontend.env config\n\n"
 
 echo "Enter your mailgun domain name"
 read mailgun_domain_name
-sed -i -e s/#CANARY_MAILGUN_DOMAIN_NAME=/CANARY_MAILGUN_DOMAIN_NAME="$mailgun_domain_name"/g switchboard.env
-
 echo "Mailgun domain name:" $mailgun_domain_name "was added to the switchboard.env config\n\n"
 
 echo "What is the API key for mailgun"
 read mailgun_api_key
-sed -i -e s/#CANARY_MAILGUN_API_KEY=/CANARY_MAILGUN_API_KEY="$mailgun_api_key"/g switchboard.env
-
 echo "Mailgun key:" $mailgun_api_key "was added to the switchboard.env config\n\n"
 
 echo "What is the public IP of this canarytoken server"
 read public_ip
-sed -i -e s/CANARY_PUBLIC_IP=/CANARY_PUBLIC_IP="$public_ip"/g switchboard.env
-
 echo "The IP address" $public_ip "was added to the switchboard.env config\n\n"
+
+
+#Replacing the input variables in the respected config files
+
+sed -i -e s/CANARY_DOMAINS=.*/CANARY_DOMAINS="$domain_name"/g frontend.env
+sed -i -e s/CANARY_NXDOMAINS=.*/CANARY_NXDOMAINS="$sub_domain_name"/g frontend.env
+sed -i -e s/#CANARY_MAILGUN_DOMAIN_NAME=/CANARY_MAILGUN_DOMAIN_NAME="$mailgun_domain_name"/g switchboard.env
+sed -i -e s/#CANARY_MAILGUN_API_KEY=/CANARY_MAILGUN_API_KEY="$mailgun_api_key"/g switchboard.env
+sed -i -e s/CANARY_PUBLIC_IP=/CANARY_PUBLIC_IP="$public_ip"/g switchboard.env
