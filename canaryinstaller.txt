@@ -1,9 +1,15 @@
 !/bin/sh
 
+#Updating the current installed packages
+
+apt-get update 
+
+#Disables the default DNS server that is usually hosted on Ubuntu client and server
+
 systemctl disable systemd-resolved
 systemctl stop systemd-resolved
 
-apt-get update 
+#Installation of docker files
 
 apt-get install -y \
     apt-transport-https \
@@ -20,52 +26,18 @@ add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-sudo apt-get update   
-apt-get install -y docker-ce docker-ce-cli containerd.io
+#Installation of docker-compose 
 
+apt-get install -y docker-ce docker-ce-cli containerd.io
 curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
-docker-compose --version
+
+#Imports the necessary canarytokens files from Thinkst GitHub repository
 
 git clone https://github.com/thinkst/canarytokens-docker
+
+#Creates the working config files by copying the backup files
 
 cd canarytokens
 cp frontend.env.dist frontend.env
 cp switchboard.env.dist switchboard.env
-
-echo "What is your domain name?"
-read domain_name
-sed -i -e s/CANARY_DOMAINS=.*/CANARY_DOMAINS="$domain_name"/g frontend.env
-
-echo "Added domain:" $domain_name
-
-echo "Enter your subdomain, eg pdf.example.com"
-read sub_domain_name
-sed -i -e s/CANARY_NXDOMAINS=.*/CANARY_NXDOMAINS="$sub_domain_name"/g frontend.env
-
-echo "Added subdomain:" $sub_domain_name
-
-echo "What is your mailgun domain name?"
-read mailgun_domain_name
-sed -i -e s/#CANARY_MAILGUN_DOMAIN_NAME=/CANARY_MAILGUN_DOMAIN_NAME="$mailgun_domain_name"/g switchboard.env
-
-echo "Added mailgun domain name:" $mailgun_domain_name
-
-echo "What is the API key for mailgun"
-read mailgun_api_key
-sed -i -e s/#CANARY_MAILGUN_API_KEY=/CANARY_MAILGUN_API_KEY="$mailgun_api_key"/g switchboard.env
-
-echo "Mailgun key:" $mailgun_api_key "was added"
-
-echo "What is the public IP of this canarytoken server"
-read public_ip
-sed -i -e s/CANARY_PUBLIC_IP=/CANARY_PUBLIC_IP="$public_ip"/g switchboard.env
-
-echo "The IP address" $public_ip "was added"
-
-echo "What is the mailgun email address"
-read mailgun_email
-sed -i -e s/CANARY_ALERT_EMAIL_FROM_ADDRESS=/CANARY_ALERT_EMAIL_FROM_ADDRESS="$mailgun_email"/g switchboard.env
-
-echo "The mailgun email" $mailgun_email "was added"
-
